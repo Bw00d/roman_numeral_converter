@@ -18,18 +18,16 @@ end
 def deromanify(roman_numeral)
   converted = []
   unique_case = /(CM)|(IX)|(IV)|(CD)|(XL)|(XC)/
-  u_cases = []
 
   3.times do 
     if unique_case =~ roman_numeral
-      temp_index = unique_case =~ roman_numeral
-      converted.push(roman_numeral[temp_index..temp_index+1])
-      roman_numeral[temp_index..temp_index+1] = ''
+      case_index = unique_case =~ roman_numeral
+      converted.push(roman_numeral[case_index..case_index+1])
+      roman_numeral[case_index..case_index+1] = ''
     end
   end
-  temp_arr = roman_numeral.split('')
-  temp_arr.each do |number|
-    converted.push(number)
+  roman_numeral.split('').each do |number|
+    converted << number
   end
   converted.map! { |e| $romans.invert[e] }
 
